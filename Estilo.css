@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+
+
+body{
+    background-image: url(https://image.freepik.com/free-vector/business-workplace-background_87720-336.jpg);
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+
+
+}
+
+h1 {
+
+    margin: 30px;
+    padding: 5px;
+    color: black;
+}
+h2{
+    margin: 30px;
+    color: brown;
+}
+p{
+    margin: 20px;
+    font-size: 30px;
+    font-family: 'Dancing Script', cursive;
+
+}
+.Fuente{
+    margin: 5px;
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
+}
