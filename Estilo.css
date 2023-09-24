@@ -14,13 +14,15 @@ body{
 
 h1 {
 
-    margin: 30px;
-    padding: 5px;
+
     color: black;
 }
-h2{
+h2, h3{ 
     margin: 30px;
     color: brown;
+}
+h5 ,h4{
+    color:black;
 }
 p{
     margin: 20px;
@@ -29,7 +31,41 @@ p{
 
 }
 .Fuente{
-    margin: 5px;
+    margin: 20px;
     font-size: 24px;
     font-family: 'Times New Roman', Times, serif;
+}
+.arena {
+     margin-top: 0%;
+   
+    background-color: rgb(199, 195, 195);
+    border-radius: 10px;
+    text-align: center;
+}
+.green{
+    
+background-color:rgb(231, 226, 226);
+border-radius: 10px;
+text-align: center;
+
+}
+
+a
+{
+
+    text-decoration: none;
+}
+a:hover{
+
+    background-color: rgb(171, 248, 182);
+    
+    
+}
+.arena:hover{
+
+    background-color: rgb(122, 112, 112);
+}
+.green:hover{
+
+    background-color: rgb(189, 194, 189);
 }
