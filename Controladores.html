@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+          rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+          crossorigin="anonymous">
+          <link rel="stylesheet" href="EstiloEcoproyecto.Css">
+        </head>
+
+          <div class="yellow">
+          <h1> Portal Controlador</h1>
+
+        <p> package com.Torneo.TorneoDeLatas.Controladores;</p> 
+
+        <p> import com.Torneo.TorneoDeLatas.Excepciones.Miexception;</p> 
+
+        <p> import com.Torneo.TorneoDeLatas.Servicios.usuarioServicio;</p> 
+        <p> import com.Torneo.TorneoDeLatas.entidades.Usuario;</p> 
+        <p> import java.util.List;</p> 
+        <p> import java.util.logging.Level;</p> 
+        <p> import java.util.logging.Logger;</p> 
+        <p> import javax.servlet.http.HttpSession;</p> 
+
+        <p> import org.springframework.beans.factory.annotation.Autowired;</p> 
+        <p> import org.springframework.security.access.prepost.PreAuthorize;</p> 
+        <p> import org.springframework.stereotype.Controller;</p> 
+        <p> import org.springframework.ui.ModelMap;</p> 
+        <p> import org.springframework.web.bind.annotation.GetMapping;</p> 
+        <p> import org.springframework.web.bind.annotation.PathVariable;</p> 
+        <p> import org.springframework.web.bind.annotation.PostMapping;</p> 
+        <p> import org.springframework.web.bind.annotation.RequestMapping;</p> 
+        <p> import org.springframework.web.bind.annotation.RequestParam;</p> 
+        <p> import org.springframework.web.multipart.MultipartFile;</p> 
+
+        <p> @Controller</p> 
+        <p> @RequestMapping("/")</p> 
+        <p> public class PortalControlador {</p> 
+
+            <p> @Autowired</p> 
+            <p> private usuarioServicio usuarioservicio;</p> 
+
+            <p>  @GetMapping("/")</p> 
+            <p> public String index() {</p> 
+
+                <p> return "index.html";</p> 
+                <p>  }</p> 
+
+                <p>  @GetMapping("/Iniciosesion")</p> 
+                <p>  public String Iniciosesion(@RequestParam(required = false) String error, ModelMap modelo) {</p> 
+                    <p>  if (error != null) {</p> 
+                        <p>   modelo.put("error", "Correo o contraseña incorrectos");</p> 
+                        <p>  }</p> 
+                        <p>  return "Iniciosesion.html";</p> 
+                        <p>  }</p> 
+
+                        <p>  @GetMapping("/registro")</p> 
+                        <p>  public String registro() {</p> 
+
+                            <p>   return "usuario-form.html";</p> 
+                            <p>  }</p> 
+
+                            <p> @PostMapping("/registrar")</p> 
+
+                            <p> public String registrar(String id, @RequestParam String email, @RequestParam(required = false) </p> 
+                            <p>Integer dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String password,</p> 
+                            <p> @RequestParam String password2, ModelMap modelo, MultipartFile archivo) {</p> 
+
+                                <p> try {</p> 
+                                    <p> usuarioservicio.crearUsuario(archivo, email, dni, nombre, apellido, password, password2);</p> 
+                                    <p> modelo.put("exito", "Usuario cargado exitosamente!!!");</p> 
+                                    <p> } catch (Miexception ex) {</p> 
+                                        <p> modelo.put("error", ex.getMessage());</p> 
+                                        <p>  modelo.put("email", email);</p> 
+                                        <p> modelo.put("dni", dni);</p> 
+                                        <p> modelo.put("nombre", nombre);</p> 
+                                        <p>modelo.put("apellido", apellido);</p> 
+                                        <p> modelo.put("password", password);</p> 
+                                        <p>  modelo.put("password2", password2);</p> 
+                                        <p> return "usuario-form.html";</p> 
+                                        <p> }</p> 
+
+                                        <p> return "index.html";</p> 
+
+    }</p> 
+
+    <p> @GetMapping("/Basesycondiciones")</p> 
+    <p> public String Basesycondicones() {</p> 
+
+        <p> return "Basesycondiciones.html";</p> 
+    }</p> 
+
+    <p> @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")</p> 
+    <p> @GetMapping("/Central")</p> 
+    <p> public String Central(HttpSession Session) {</p> 
+        <p>  Usuario logueado = (Usuario) Session.getAttribute("usuariosession");</p> 
+        <p> return "Central.html";</p> 
+        <p> }</p> 
+
+        <p> @GetMapping("/Listartodos")</p> 
+        <p> public String Listartodos(</p> 
+        <p> ModelMap modelo) {</p> 
+            <p> List<Usuario> usuarios = usuarioservicio.listarUsuario();</p> 
+
+                <p> modelo.addAttribute("usuarios", usuarios);</p> 
+                <p>return "Listartodos.html";</p> 
+
+                <p> }</p> 
+
+                <p> @GetMapping("/Modificar")</p> 
+                <p>public String Modificar(ModelMap modelo) {</p> 
+                    <p>//  modelo.put("usuario", usuarioservicio.getOne(id));</p> 
+                    <p> return "usuario_modificar.html";</p> 
+                    <p>  }
+
+                        <p> @PostMapping("/Modifica")</p> 
+                        <p> public String Modifica( @RequestParam String email2, @RequestParam(required = false) Integer dni2,</p> 
+                        <p> @RequestParam String nombre2, @RequestParam String apellido2, @RequestParam String password3,</p> 
+                        <p>  @RequestParam String password4, ModelMap modelo, MultipartFile archivo) {</p> 
+                            <p> List<Usuario> usuarios = usuarioservicio.listarUsuario();</p> 
+
+                                <p> modelo.addAttribute("usuarios", usuarios);</p> 
+
+                                <p> for (Usuario usuario : usuarios) {</p> 
+
+                                    <p> if (email2.equals(usuario.getEmail())) {</p> 
+                                        <p>  try {</p> 
+                                            <p> System.out.println(email2+" "+" "+usuario.getEmail());</p> 
+                                            <p> usuarioservicio.modificarUsuario(archivo, email2, dni2, nombre2, apellido2, password3, password4);</p> 
+                                            <p>  } catch (Miexception ex) {</p> 
+                                                <p>  modelo.put("error", ex.getMessage());</p> 
+                                                <p>  return "usuario_modificar.html";</p> 
+                                                <p> }</p> 
+                                                <p> }</p> 
+
+                                                <p> }</p> 
+                                                <p> return "Central.html";</p> 
+                                                <p> }</p> 
+
+                                                <p> @GetMapping("/paneles")</p> 
+                                                <p> public String paneles() {</p> 
+
+                                                    <p>  return "panel.html";</p> 
+                                                    <p>  }</p> 
+
+                                                    <p>@GetMapping("/Consulta")</p> 
+                                                    <p> public String Consulta() {</p> 
+
+                                                        <p> return "Consulta.html";</p> 
+
+                                                        <p> }</p> 
+
+                                                        <p> @PostMapping("/Consultar")</p> 
+                                                        <p> public String Consultar(@RequestParam(required = false) String email2, @RequestParam(required = false) </p> 
+                                                        <p> String nombre2, @RequestParam(required = false) String apellido2, ModelMap modelo) {</p> 
+
+                                                            <p>List<Usuario> usuarios = usuarioservicio.listarUsuario();</p> 
+
+                                                                <p> modelo.addAttribute("usuarios", usuarios);</p> 
+                                                                <p> System.out.println(email2 + nombre2 + apellido2);</p> 
+                                                                <p> for (Usuario usuario : usuarios) {</p> 
+
+                                                                    <p> if (email2.equals(usuario.getEmail())) {</p> 
+
+                                                                        <p>  email2 = usuario.getEmail();</p> 
+                                                                        <p> Integer dni2 = usuario.getDni();</p> 
+                                                                        <p> nombre2 = usuario.getNombre();</p> 
+                                                                        <p> apellido2 = usuario.getApellido();</p> 
+                                                                        <p> double ecopuntos2 = usuario.getEcopuntos();</p> 
+
+                                                                        <p> modelo.put("email2", email2);</p> 
+                                                                        <p> modelo.put("dni2", dni2);</p> 
+                                                                        <p> modelo.put("nombre2", nombre2);</p> 
+                                                                        <p>modelo.put("apellido2", apellido2);</p> 
+                                                                        <p> modelo.put("ecopuntos", ecopuntos2);</p> 
+                                                                        <p> } else {</p> 
+                                                                            <p> modelo.put("error", "Usuario no encontrado");</p> 
+
+                                                                            <p> }</p> 
+
+                                                                            <p> }</p> 
+                                                                            <p> return "Consulta.html";</p> 
+                                                                            <p> }</p> 
+
+                                                                            <p>@GetMapping("/Ingresarpuntos")</p> 
+                                                                            <p> public String Ingresarpuntos() {</p> 
+
+                                                                                <p> return "Ingresarpuntos.html";</p> 
+
+                                                                                <p> }</p> 
+
+                                                                                <p> @PostMapping("/Sumar")</p> 
+                                                                                <p> public String Sumar(@RequestParam String email2, @RequestParam double ecop, ModelMap modelo) {</p> 
+
+                                                                                    <p> List<Usuario> usuarios = usuarioservicio.listarUsuario();</p> 
+
+                                                                                        <p> modelo.addAttribute("usuarios", usuarios);</p> 
+
+                                                                                        <p>for (Usuario usuario : usuarios) {</p> 
+
+                                                                                            <p> if (email2.equals(usuario.getEmail())) {</p> 
+                                                                                                <p> usuarioservicio.modificarUsuariopuntos(email2, ecop);</p> 
+
+                                                                                                <p> }</p> 
+
+                                                                                                <p> }</p> 
+                                                                                                <p>   return "Consulta.html";</p> 
+                                                                                                <p>  }</p> 
+
+                                                                                                <p> @PostMapping("/SumarU")</p> 
+                                                                                                <p> public String Sumar(@RequestParam String email2, @RequestParam double ecop2, @RequestParam double env,</p> 
+                                                                                                <p> ModelMap modelo) {</p> 
+
+                                                                                                    <p>List<Usuario> usuarios = usuarioservicio.listarUsuario();</p> 
+
+                                                                                                        <p> modelo.addAttribute("usuarios", usuarios);</p> 
+
+                                                                                                        <p> for (Usuario usuario : usuarios) {</p> 
+
+                                                                                                            <p> if (email2.equals(usuario.getEmail())) {</p> 
+                                                                                                                <p> usuarioservicio.modificarUsuariopuntosU(email2, ecop2, env);</p> 
+
+                                                                                                                <p>  }</p> 
+
+                                                                                                                <p> }</p> 
+                                                                                                                <p> return "Consulta.html";</p> 
+                                                                                                                <p> }</p> 
+
+                                                                                                                <p> @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")</p> 
+                                                                                                                <p>  @GetMapping("/Perfil")</p> 
+                                                                                                                <p> public String Perfil(ModelMap modelo, HttpSession session) {</p> 
+                                                                                                                    <p> Usuario usuario = (Usuario) session.getAttribute("usuariosession");</p> 
+        <p> modelo.put("usuario", usuario);</p> 
+
+        <p> return "usuario_modificar.html";</p> 
+        <p> }</p> 
+            <p> @GetMapping("/ecoideas")</p> 
+            <p> public String ecoideas() {</p> 
+
+                <p> return "ecoideas.html";</p> 
+                <p> }</p> 
+    
+    
+    
+    
+                <p>}</p> 
+
+
+ </div>
+    <div class="White"></div>
+
+    <div class="yellow">
+        <h1> Imagen Controlador</h1>
+
+       <p> package com.Torneo.TorneoDeLatas.Controladores;</p>
+
+       <p>  import com.Torneo.TorneoDeLatas.Servicios.usuarioServicio;</p>
+       <p>  import com.Torneo.TorneoDeLatas.entidades.Usuario;</p>
+       <p>  import org.springframework.beans.factory.annotation.Autowired;</p>
+       <p> import org.springframework.http.HttpHeaders;</p>
+       <p>  import org.springframework.http.HttpStatus;</p>
+       <p>  import org.springframework.http.MediaType;</p>
+       <p>  import org.springframework.http.ResponseEntity;</p>
+       <p>  import org.springframework.stereotype.Controller;</p>
+       <p> import org.springframework.web.bind.annotation.GetMapping;</p>
+       <p>  import org.springframework.web.bind.annotation.PathVariable;</p>
+       <p> import org.springframework.web.bind.annotation.RequestMapping;</p>
+        
+        
+       <p>  @Controller</p>
+       <p>  @RequestMapping("/imagen")</p>
+       <p>  public class Controladorimagen {</p>
+        <p>   @Autowired</p>
+        <p>  usuarioServicio usuarioservicio;</p>
+            
+        <p>   @GetMapping("/perfil/{id}")</p>
+        <p>                      public ResponseEntity<byte[]> imagenusuario(@PathVariable String id){</p>
+             
+            <p>  Usuario usuario= usuarioservicio.getOne(id);</p>
+               
+            <p>   byte [] imagen=usuario.getImagen().getContenido();</p>
+            <p>     HttpHeaders headers= new HttpHeaders();</p>
+            <p>  headers.setContentType(MediaType.IMAGE_JPEG);</p>
+               
+            <p>   return new ResponseEntity<>(imagen,headers,HttpStatus.OK);</p>
+            <p>    }</p>
+            <p>   }</p>
+        
+
+    </div>
+    <div class="White"></div>
+    
+</body>
+</html>

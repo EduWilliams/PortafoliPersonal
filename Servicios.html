@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+          rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+          crossorigin="anonymous">
+          <link rel="stylesheet" href="EstiloEcoproyecto.Css">
+    
+    <title>Document</title>
+</head>
+<body>
+   <div class="yellow">
+        <h1> Usuario Servicio</h1>
+        <p> package com.Torneo.TorneoDeLatas.Servicios;</p>
+
+        <p>import com.Torneo.TorneoDeLatas.Excepciones.Miexception;</p>
+        <p>import com.Torneo.TorneoDeLatas.Repositorio.UsuarioRepositorio;</p>
+        <p> import com.Torneo.TorneoDeLatas.entidades.Imagen;</p>
+        <p>import com.Torneo.TorneoDeLatas.entidades.Usuario;</p>
+        <p> import com.Torneo.TorneoDeLatas.enumeraciones.Rol;</p>
+        <p> import java.util.ArrayList;</p>
+        <p> import java.util.Date;</p>
+        <p> import java.util.List;</p>
+        <p> import java.util.Optional;</p>
+        <p> import javax.servlet.http.HttpSession;</p>
+        <p> import org.springframework.beans.factory.annotation.Autowired;</p>
+        <p> import org.springframework.security.core.GrantedAuthority;</p>
+         <p> import org.springframework.security.core.authority.SimpleGrantedAuthority;</p>
+          <p> import org.springframework.security.core.userdetails.User;</p>
+        
+          <p>import org.springframework.security.core.userdetails.UserDetails;</p>
+        
+         <p> import org.springframework.security.core.userdetails.UserDetailsService;</p>
+        <p>import org.springframework.security.core.userdetails.UsernameNotFoundException;</p>
+          <p> import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</p>
+         <p> import org.springframework.stereotype.Service;</p>
+         <p> import org.springframework.transaction.annotation.Transactional;</p>
+         <p>import org.springframework.web.bind.annotation.PathVariable;</p>
+         <p>  import org.springframework.web.context.request.RequestContextHolder;</p>
+        <p> import org.springframework.web.context.request.ServletRequestAttributes;</p>
+        <p> import org.springframework.web.multipart.MultipartFile;</p>
+        
+         <p> @Service</p>
+         <p> public class usuarioServicio implements UserDetailsService {</p>
+        
+         <p> @Autowired</p>
+          <p> private UsuarioRepositorio usuariorepositorio;</p>
+           <p> @Autowired</p>
+          <p> private ImagenServicio imagenservicio;</p>
+        
+                     <p> @Transactional</p>
+          <p> public void crearUsuario(MultipartFile archivo, String email, </p>
+          <p> Integer dni, String nombre, String apellido, String password, String password2) throws Miexception {</p>
+        
+                 <p> validar(email, dni, nombre, apellido, password, password2);</p>
+        
+              <p>Usuario usuario = new Usuario();</p>
+        
+              <p> usuario.setDni(dni);</p>
+              <p> usuario.setApellido(apellido);</p>
+              <p> usuario.setNombre(nombre);</p>
+              <p>usuario.setEmail(email);</p>
+              <p> usuario.setEcopuntos(100);</p>
+              <p> usuario.setPassword(new BCryptPasswordEncoder().encode(password));</p>
+              <p> usuario.setAlta(new Date());</p>
+              <p> usuario.setRol(Rol.USER);</p>
+              <p> Imagen imagen = imagenservicio.guardar(archivo);</p>
+              <p>usuario.setImagen(imagen);</p>
+        
+              <p>usuariorepositorio.save(usuario);</p>
+              <p>  }</p>
+        
+              <p> public List<Usuario> listarUsuario() {</p>
+                <p></p>List<Usuario> usuarios = new ArrayList();</p>
+        
+                    <p> usuarios = usuariorepositorio.findAll();</p>
+                    <p> return usuarios;</p>
+        
+                    <p> }</p>
+        
+                    <p> @Transactional</p>
+                    <p> public void modificarUsuario( MultipartFile archivo, String email, Integer dni,</p>
+                    <p> String nombre, String apellido, String password, String password2) throws Miexception {</p>
+                        <p> //   validar(email, dni, nombre, apellido, password, password2);</p>
+                
+        
+                        <p> <p> System.out.println(email+" "+" "+nombre);</p>
+        
+                        <p> Usuario usuario=usuariorepositorio.buscarporemail(email);</p>
+                        <p>  usuario.setPassword(password);</p>
+                        <p> usuario.setApellido(apellido);</p>
+                        <p> usuario.setNombre(nombre);</p>
+                        <p>usuario.setDni(dni);</p>
+        
+                        <p> String idImagen = null;</p>
+                        <p> if (usuario.getImagen() != null) {</p>
+                            <p>  idImagen = usuario.getImagen().getId();</p>
+                            <p>  Imagen imagen = imagenservicio.actualizar(archivo, idImagen);</p>
+                            <p>  usuario.setImagen(imagen);</p>
+                    }</p>
+        
+                    <p></p>usuariorepositorio.save(usuario);</p>
+                
+        
+                    <p> }</p>
+        
+                    <p> @Transactional</p>
+                    <p> public void modificarUsuariopuntos( String email, Double ecop) {</p>
+        
+                
+        
+                        <p> Usuario usuario=usuariorepositorio.buscarporemail(email);</p>
+                        <p>  if (ecop != null) {</p>
+        
+                        
+                            <p> usuario.setEcopuntos((ecop * 400) + usuario.getEcopuntos());</p>
+                        <p> System.out.println("Se sumaron " + (ecop * 700));</p>
+        
+                        <p> usuariorepositorio.save(usuario);</p>
+                        <p>  }</p>
+                        <p> }</p>
+            
+        
+                        <p> @Transactional</p>
+                        <p> public void modificarUsuariopuntosU( String email, Double ecop2, Double env) {</p>
+        
+                            <p>  Usuario usuario=usuariorepositorio.buscarporemail(email);</p>
+        
+                
+        
+                            <p> if (ecop2 != null) {</p>
+                        
+                                <p> usuario.setEcopuntos((ecop2 * (env / 100)) + usuario.getEcopuntos());</p>
+                        <p>  usuariorepositorio.save(usuario);</p>
+                        <p>  }</p>
+                        <p>  }</p>
+            
+        
+                        <p>  public Usuario getOne(String id) {</p>
+                            <p>  return usuariorepositorio.getOne(id);</p>
+                            <p>  }</p>
+        
+                            <p>  private void validar(String email, Integer dni, String nombre, String apellido,</p>
+                            <p>  String password, String password2) throws Miexception {</p>
+                                <p>  if (email == null || email.isEmpty()) {</p>
+                                    <p> throw new Miexception("Debe ingresar su correo electronico para contacto");</p>
+                                    <p> }</p>
+        
+                                    <p> if (nombre == null || nombre.isEmpty()) {</p>
+                                        <p>  throw new Miexception("Debe ingresar su nombre");</p>
+                                        <p> }</p>
+                                        <p> if (apellido == null || apellido.isEmpty()) {</p>
+                                            <p>  throw new Miexception("Debe ingresar su apellido");</p>
+                                            <p> }</p>
+        
+                                            <p>  if (password == null || password.isEmpty() || password.length() <= 5) {</p>
+                                                <p> throw new Miexception("La contraseña no debe estar vacia ni ser menor a 5 digitos");</p>
+                                                <p>  }</p>
+        
+                                                <p>  if (!password.equals(password2)) {</p>
+                                                    <p>  System.out.println("Las contraseñas deben ser iguales");</p>
+                                                    <p> throw new Miexception("Las contraseñas deben ser iguales");</p>
+        
+                                                    <p>  }</p>
+                                                    <p> }</p>
+        
+                                                    <p> @Override</p>
+                                                    <p>public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {</p>
+                                                        <p> Usuario usuario = usuariorepositorio.buscarporemail(email);</p>
+                                                        <p> if (usuario != null) {</p>
+                                                            <p> List<GrantedAuthority> permisos = new ArrayList();</p>
+                                                                <p> GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());</p>
+                                                                <p> permisos.add(p);</p>
+                                                                <p> ServletRequestAttributes attr = (ServletRequestAttributes)</p>
+                                                                <p>  RequestContextHolder.currentRequestAttributes();</p>
+        
+                                                                <p> HttpSession session = attr.getRequest().getSession(true);</p>
+                                                                <p> session.setAttribute("usuariosession", usuario);</p>
+                                                                <p> return new User(usuario.getEmail(), usuario.getPassword(), permisos);</p>
+                                                                <p> } else {</p>
+                                                                    <p>  return null;</p>
+                                                                    <p>  }</p>
+                                                                    <p>  }</p>
+        
+                                                                    <p>  }</p>
+                                                                </div>                                                       
+        
+        <div class="White"></div>
+
+        <div class="yellow">
+        <h1> Servicio Imagen</h1>
+        <p> package com.Torneo.TorneoDeLatas.Servicios;</p>
+
+        <p> import com.Torneo.TorneoDeLatas.Excepciones.Miexception;</p>
+        <p> import com.Torneo.TorneoDeLatas.Repositorio.Imagenrepositorio;</p>
+        <p> import com.Torneo.TorneoDeLatas.entidades.Imagen;</p>
+        <p>  import java.util.Optional;</p>
+        <p> import org.springframework.beans.factory.annotation.Autowired;</p>
+        <p> import org.springframework.stereotype.Service;</p>
+        <p> import org.springframework.web.multipart.MultipartFile;</p>
+        
+        <p> @Service</p>
+        <p> public class ImagenServicio {</p>
+        
+            <p> @Autowired</p>
+            <p> private Imagenrepositorio imagenrepositorio;</p>
+        
+            <p> public Imagen guardar(MultipartFile archivo) throws Miexception {</p>
+                <p> if (archivo != null) {</p>
+        
+                    <p> try {</p>
+                        <p> Imagen imagen = new Imagen();</p>
+                        <p>  imagen.setMime(archivo.getContentType());</p>
+                        <p>  imagen.setNombre(archivo.getName());</p>
+                        <p> imagen.setContenido(archivo.getBytes());</p>
+        
+                        <p> return imagenrepositorio.save(imagen);</p>
+                        <p>  } catch (Exception ex) {</p>
+                            <p>   System.err.println(ex.getMessage());</p>
+                            <p>  }</p>
+        
+                            <p> }</p>
+                            <p> return null;</p>
+        
+                            <p>  }</p>
+        
+                            <p>   public Imagen actualizar(MultipartFile archivo, String idImagen) throws Miexception {</p>
+                                <p>   if (archivo != null) {</p>
+                                    <p>  try {</p>
+                                        <p>  Imagen imagen = new Imagen();</p>
+                    
+                                        <p> if (idImagen != null) {</p>
+                        
+                                            <p>   Optional<Imagen> Respuesta=imagenrepositorio.findById(idImagen);</p>
+                        
+                                                <p>  if (Respuesta.isPresent()) {</p>
+                                                    <p>    imagen=Respuesta.get();</p>
+                                                    <p>  }</p>
+                                                    <p>  }</p>
+                        
+                                                    <p>  imagen.setMime(archivo.getContentType());</p>
+                                                    <p> imagen.setNombre(archivo.getName());</p>
+                                                    <p>  imagen.setContenido(archivo.getBytes());</p>
+        
+                                                    <p>  return imagenrepositorio.save(imagen);</p>
+                                                    <p>  } catch (Exception ex) {</p>
+                                                        <p> System.err.println(ex.getMessage());</p>
+                                                        <p>  }</p>
+        
+                                                        <p>  }</p>
+                                                        <p>  return null;</p>
+        
+                                                        <p>  }</p>
+        
+                                                        <p>  }</p>
+                                                    </div>                                          
+        
+        <div class="White"></div>
+</body>
+</html>

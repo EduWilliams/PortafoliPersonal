@@ -1,0 +1,117 @@
+*{
+    margin:0;
+    padding:0;
+} 
+
+  body{
+
+    background-image: url(https://thumbs.dreamstime.com/z/fondo-ecol%C3%B3gico-15231812.jpg);
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+
+  
+    
+}
+ .form-register{
+      width: 400px;
+      background: green;
+      padding: 10px;
+      margin:auto;
+      margin-top: 100px;
+  }
+  .controls{
+     width: 70%; 
+      padding: 10px;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      text-align: center;
+      background-color:green;
+      color: white;
+
+  }
+    .datos
+   {
+         padding: 10px;
+      margin:100px;
+      margin-top: 50px;
+      
+   }
+   .gris 
+   {
+       color: white;
+       height: 20%;
+       width: 50%;
+       background-color: gray;
+       
+   }
+  
+   .Marron
+   {
+        color: white;
+       height: 20%;
+       width: 50%;
+       background-color: brown;
+   }
+   .verde{
+        color: white;
+        height: 20%;
+       width: 50%;
+       background-color: greenyellow;
+   }
+   .White{
+
+    background-color: white;
+    height: 30px;
+    width: 100%;
+   }
+   img{
+
+    height: 50%;
+    width: 50%;
+    border-radius: 50px;
+    align-self:rigth;
+   }
+   input::placeholder{
+
+
+    color: aliceblue;
+   }
+
+   .control{
+    width: 90%; 
+     padding: 10px;
+     margin-bottom: 16px;
+     border-radius: 10px;
+    
+    }
+    .control::placeholder{
+
+        color: black;
+    }
+
+    .yellow{
+        height: 80%;
+        width: 70%;
+        margin: 20px;
+        padding: 20px;
+    background-color: beige;
+    }
+    .button{
+        align-content: center;
+
+        height: 50px;
+        width: 100x;
+        margin: 10px;
+        padding: 10px;
+    }
+    .button:hover{
+
+        color: rgb(214, 197, 197);
+    }
+    .conteiner{
+
+        align-self: center;
+        margin-top: 50px;
+    }

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+          rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+          crossorigin="anonymous">
+          <link rel="stylesheet" href="EstiloEcoproyecto.Css">
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="yellow">
+        <h1> Entidad Usuario</h1>
+       <p> package com.Torneo.TorneoDeLatas.entidades;</p>
+
+       <p> import com.Torneo.TorneoDeLatas.enumeraciones.Rol;</p>
+       <p> import java.util.Date;</p>
+       <p> import javax.persistence.Column;</p>
+       <p>  import javax.persistence.Entity;</p>
+       <p> import javax.persistence.EnumType;</p>
+       <p>  import javax.persistence.Enumerated;</p>
+       <p> import javax.persistence.GeneratedValue;</p>
+       <p>  import javax.persistence.Id;</p>
+       <p> import javax.persistence.OneToOne;</p>
+       <p> import javax.persistence.Table;</p>
+       <p> import javax.persistence.Temporal;</p>
+       <p> import javax.persistence.TemporalType;</p>
+       <p>  import org.hibernate.annotations.GenericGenerator;</p>
+        
+       <p>  @Entity</p>
+       <p>  @Table</p>
+       <p> public class Usuario {</p>
+        
+        <p>  @Id</p>
+        <p>  @GeneratedValue(generator = "uuid")</p>
+        <p>  @GenericGenerator(name = "uuid", strategy = "uuid2")</p>
+        <p>  private String id;</p>
+        
+        <p>  private String email;</p>
+        <p>   @Column(name = "Dni")</p>
+        <p>  private Integer dni;</p>
+        <p>   @Column(name = "Nombre")</p>
+        <p>   private String nombre;</p>
+        <p>   @Column(name = "Apellido")</p>
+        <p>   private String apellido;</p>
+        <p>   private double ecopuntos;</p>
+        <p>   private String password;</p>
+        <p>   @Enumerated(EnumType.STRING)</p>
+        <p>  private Rol rol;</p>
+        <p>   @Temporal(TemporalType.DATE)</p>
+        <p>   private Date alta;</p>
+        <p>   @OneToOne</p>
+        <p>   private Imagen imagen;</p>
+        
+        <p>   public Usuario() {</p>
+            <p>   }</p>
+        
+            <p>  public Usuario(String id, String email, Integer dni, String nombre, String apellido, double ecopuntos,</p> 
+            <p>  String password, Rol rol, Date alta, Imagen imagen) {</p>
+                <p>  this.id = id;</p>
+                <p>   this.email = email;</p>
+                <p>  this.dni = dni;</p>
+                <p>   this.nombre = nombre;</p>
+                <p>   this.apellido = apellido;</p>
+                <p>  this.ecopuntos = ecopuntos;</p>
+                <p>   this.password = password;</p>
+                <p>  this.rol = rol;</p>
+                <p>  this.alta = alta;</p>
+                <p>  this.imagen = imagen;</p>
+                <p>   }</p>
+        
+                <p>  public String getId() {</p>
+                    <p>  return id;</p>
+                    <p>   }</p>
+        
+                    <p>   public void setId(String id) {</p>
+                        <p>   this.id = id;</p>
+                        <p>   }</p>
+        
+                        <p>   public String getEmail() {</p>
+                            <p>  return email;</p>
+                            <p>  }</p>
+        
+                            <p>   public void setEmail(String email) {</p>
+                                <p>    this.email = email;</p>
+                                <p>  }</p>
+        
+                                <p>  public Integer getDni() {</p>
+                                    <p>   return dni;</p>
+                                    <p>  }</p>
+        
+                                    <p>  public void setDni(Integer dni) {</p>
+                                        <p>  this.dni = dni;</p>
+                                        <p>  }</p>
+        
+                                        <p>  public String getNombre() {</p>
+                                            <p>   return nombre;</p>
+                                            <p>   }</p>
+        
+                                            <p>  public void setNombre(String nombre) {</p>
+                                                <p>   this.nombre = nombre;</p>
+                                                <p>   }</p>
+        
+                                                <p>  public String getApellido() {</p>
+                                                    <p>   return apellido;</p>
+                                                    <p>  }</p>
+        
+                                                    <p>  public void setApellido(String apellido) {</p>
+                                                        <p>  this.apellido = apellido;</p>
+                                                        <p>  }</p>
+        
+                                                        <p>  public double getEcopuntos() {</p>
+                                                            <p>   return ecopuntos;</p>
+                                                            <p>  }</p>
+        
+                                                            <p>  public void setEcopuntos(double ecopuntos) {</p>
+                                                                <p>  this.ecopuntos = ecopuntos;</p>
+                                                                <p>  }</p>
+        
+                                                                <p>   public String getPassword() {</p>
+                                                                    <p>    return password;</p>
+                                                                    <p>    }</p>
+        
+                                                                    <p>  public void setPassword(String password) {</p>
+                                                                        <p>    this.password = password;</p>
+                                                                        <p>    }</p>
+        
+                                                                        <p>  public Rol getRol() {</p>
+                                                                            <p>    return rol;</p>
+                                                                            <p>  }</p>
+        
+                                                                            <p>   public void setRol(Rol rol) {</p>
+                                                                                <p>    this.rol = rol;</p>
+                                                                                <p>  }</p>
+        
+                                                                                <p>   public Date getAlta() {</p>
+                                                                                    <p>   return alta;</p>
+                                                                                    <p>   }</p>
+        
+                                                                                    <p>  public void setAlta(Date alta) {</p>
+                                                                                        <p>    this.alta = alta;</p>
+                                                                                        <p>   }</p>
+        
+                                                                                        <p>   public Imagen getImagen() {</p>
+                                                                                            <p>   return imagen;</p>
+                                                                                            <p>    }</p>
+        
+                                                                                            <p>  public void setImagen(Imagen imagen) {</p>
+                                                                                                this.imagen = imagen;</p>
+                                                                                                this.imagen = imagen;</p>
+                                                                                                this.imagen = imagen;</p>
+                                                                                                <p>   }</p>
+        
+                                                                                                <p>  }</p>
+                                    </div>
+        <div class="White"></div>
+
+
+        <div class="yellow">
+        <h1> Entidad Imagen</h1>
+
+        <p> package com.Torneo.TorneoDeLatas.entidades;</p>
+
+        <p> import javax.persistence.Basic;</p>
+        <p> import javax.persistence.Entity;</p>
+        <p></p>import javax.persistence.FetchType;</p>
+        <p> import javax.persistence.GeneratedValue;</p>
+        <p> import javax.persistence.Id;</p>
+        <p> import javax.persistence.Lob;</p>
+        <p> import org.hibernate.annotations.GenericGenerator;</p>
+        
+        <p> @Entity</p>
+        <p></p>public class Imagen {</p>
+            <p>  @Id</p>
+            <p> @GeneratedValue(generator="uuid")</p>
+            <p> @GenericGenerator(name="uuid",strategy="uuid2")</p>
+            <p> private String id;</p>
+            <p> private String mime;</p>
+            <p> private String nombre;</p>
+            <p> @Lob @Basic(fetch = FetchType.LAZY)</p>
+            <p> private byte[] contenido;</p>
+        
+        
+            <p> public Imagen() {</p>
+                <p> }</p>
+        
+                <p> public String getId() {</p>
+                    <p>  return id;</p>
+                    <p> }</p>
+        
+                    <p>  public void setId(String id) {</p>
+                        <p>  this.id = id;</p>
+                        <p> }</p>
+        
+                        <p>  public String getMime() {</p>
+                            <p>  return mime;</p>
+                            <p>   }</p>
+        
+                            <p>  public void setMime(String mime) {</p>
+                                <p>  this.mime = mime;</p>
+                                <p>  }</p>
+        
+                                <p> public String getNombre() {</p>
+                                    <p>  return nombre;</p>
+                                    <p>  }</p>
+        
+                                    <p>  public void setNombre(String nombre) {</p>
+                                        <p>  this.nombre = nombre;</p>
+                                        <p>   }</p>
+        
+                                        <p>  public byte[] getContenido() {</p>
+                                            <p>  return contenido;</p>
+                                            <p>  }</p>
+        
+                                            <p>    public void setContenido(byte[] contenido) {</p>
+                                                <p> this.contenido = contenido;</p>
+                                                <p>  }</p>
+            
+                                                <p> }</p>
+                                    </div>
+        <div class="White"></div>
+</body>
+
+</html>

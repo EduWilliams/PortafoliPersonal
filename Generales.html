@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+          rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+          crossorigin="anonymous">
+          <link rel="stylesheet" href="EstiloEcoproyecto.Css">
+          <div class="yellow">
+          <h1>Main del proyecto</h1>
+
+<p> import org.springframework.boot.SpringApplication; </p>
+<p> import org.springframework.boot.autoconfigure.SpringBootApplication; </p>
+    
+<p> @SpringBootApplication </p>
+<p> public class TorneoDeLatasApplication { </p>
+    
+    <p> public static void main(String[] args) { </p>
+        <p>  SpringApplication.run(TorneoDeLatasApplication.class, args); </p>
+        <p>  } </p>
+    
+        <p> } </p>
+
+    </div>
+    <div class="White"></div>
+    <div class="yellow">
+    <h1> Seguridad Web</h1>
+
+   <p> package com.Torneo.TorneoDeLatas;</p>
+
+   <p> import com.Torneo.TorneoDeLatas.Servicios.usuarioServicio;</p>
+   <p> import org.springframework.beans.factory.annotation.Autowired;</p>
+   <p>import org.springframework.context.annotation.Configuration;</p>
+   <p> import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</p>
+   <p> import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;</p>
+   <p> import org.springframework.security.config.annotation.web.builders.HttpSecurity;</p>
+   <p>import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</p>
+   <p> import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</p>
+   <p>import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</p>
+    
+   <p>@Configuration</p>
+   <p> @EnableWebSecurity</p>
+   <p>@EnableGlobalMethodSecurity(prePostEnabled=true)</p>
+   <p>public class seguridadweb  extends WebSecurityConfigurerAdapter{</p>
+    <p> @Autowired</p>
+    <p> public  usuarioServicio usuarioservicio;</p>
+    <p> @Autowired</p>
+    <p> public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{</p>
+        <p> auth.userDetailsService(usuarioservicio).passwordEncoder(new BCryptPasswordEncoder());</p>
+          
+        <p> // .passwordEncoder(new BCryptPasswordEncoder());</p>
+        <p> }</p>
+        <p>  @Override</p>
+        <p>protected void configure(HttpSecurity http) throws Exception{</p>
+        
+            <p>      http</p>
+            <p>     .authorizeHttpRequests()</p>
+            <p>     .antMatchers("/admin/*").hasRole("ADMIN")</p>
+            <p>     .antMatchers("/css/*","/js/*","/img/*","/**")</p>
+            <p>     .permitAll()</p>
+            <p>     .and().formLogin()</p>
+            <p>     .loginPage("/Iniciosesion")</p>
+            <p>     .loginProcessingUrl("/logincheck")</p>
+            <p>     .usernameParameter("email")</p>
+            <p>     .passwordParameter("password")</p>
+            <p>     .defaultSuccessUrl("/Central")</p>
+            <p>     .permitAll()</p>
+            <p>     .and().logout()</p>
+            <p>     .logoutUrl("/logout")</p>
+            <p>     .logoutSuccessUrl("/Iniciosesion")</p>
+            <p>     .permitAll()</p>
+            <p>     .and().csrf()</p>
+            <p>     .disable();</p>
+        
+            <p> }</p>
+                
+                
+            <p>  }</p>
+    
+
+
+</div>
+<div class="White"></div>
+
+<div class="yellow">
+    <h1>Enumeracion ROL</h1>
+
+
+
+    <p>package com.Torneo.TorneoDeLatas.enumeraciones;</p>
+
+
+    <p> public enum Rol {</p>
+        <p>     USER,</p>
+        <p>     ADMIN;</p>
+        <p>  }</p>
+    
+
+
+</div>
+<div class="White"></div>
+<div class="yellow">
+    <h1>Application.properties</h1>
+
+    <p>spring.datasource.url:jdbc:mysql://localhost:3306/usuariolatas?allowPublicKeyRetrieval=true&useSSL</p>
+    <p>=false&useTimezone=true&serverTimezone=GMT&characterEncoding=UTF-8</p>
+    <p> spring.datasource.username: root</p>
+    <p> spring.datasource.password: root</p>
+    <p> spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver</p>
+    <p> spring.jpa.show-sql: true</p>
+    <p> spring.jpa.hibernate.ddl-auto: update</p>
+    <p> spring.jpa.properties.hibernate.dialect:org.hibernate.dialect.MySQL5InnoDBDialect</p>
+    <p> spring.thymeleaf.cache: false</p>
+
+
+</div>
+<div class="White"></div>
+</body>
+</html>
