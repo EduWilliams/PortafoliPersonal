@@ -115,3 +115,10 @@
         align-self: center;
         margin-top: 50px;
     }
+    .fijo{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        margin: 30px;
+      
+    }
