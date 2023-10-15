@@ -11,7 +11,7 @@ body{
 
 
 }
-img{
+.Personal{
     width: 300px; 
         height: 300px; 
         border-radius: 150px;
@@ -21,6 +21,15 @@ img{
         margin: auto;
         display: block;
 
+}
+.Foto{
+
+    width: 200px; 
+        height: 300px; 
+        border-radius: 15px;
+        text-align: center;
+        margin: auto;
+        display: block;
 }
 
 h1 {
