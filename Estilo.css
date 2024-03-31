@@ -11,6 +11,33 @@ body{
 
 
 }
+.CONTAINERT{
+
+    DISPLAY: FLEX;
+    FLEX-WRAP: WRAP;
+  }
+  
+  .ITEM {
+    WIDTH: 100%;
+    PADDING: 2EM;
+    FONT-SIZE: 2REM;
+  }
+  
+  @MEDIA (MIN-WIDTH: 768PX) {
+    .ITEM {
+      WIDTH: 50%;
+      FONT-SIZE: 1.5REM;
+    }
+  }
+  
+  @MEDIA (MIN-WIDTH: 1024PX) {
+    .ITEM {
+      WIDTH: 33.33%;
+      FONT-SIZE: 1REM;
+    }
+
+
+}
 .Personal{
     width: 300px; 
         height: 300px; 
@@ -24,12 +51,14 @@ body{
 }
 .Foto{
 
-    width: 300px; 
-        height: 400px; 
+    width: 80%; 
+        height: 90%; 
+        max-width: 300px;
+        max-height: 400px;
         border-radius: 15px;
-        text-align: center;
-        margin: auto;
-        display: block;
+        align-items: left;
+        
+     
         box-shadow: 0px 10px 10px;
         cursor: pointer;
 }
@@ -38,7 +67,7 @@ body{
 #botoncodigo{
     background-color:rgb(95, 93, 93);
     
-    width: 300px; 
+    width: 25%; 
     height: 40px; 
     border-radius: 15px;
     text-align: center;
@@ -155,7 +184,7 @@ a:hover{
 .pie{
 
 width: 100%;
-height: 300px;
+height: 30%;
 background-color: gray;
 
 }
@@ -184,12 +213,36 @@ background-color: gray;
 }
 .Foto2{
 
-    width: 300px; 
-        height: 300px; 
+    width: 30%; 
+        height: 40%; 
         border-radius: 15px;
         text-align: center;
         margin: auto;
         display: block;
         box-shadow: 0px 10px 10px;
         cursor: pointer;
+}
+#efecto{
+   
+width: 25%;
+font-size: 20px;
+animation-name: miAnimacion;
+    animation-duration: 3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+@keyframes miAnimacion {
+    from {color: red;}
+    to {color: blue;}
+}
+
+
+.sobremi{
+    width: 100%;
+    border: 1px solid black;
+   background-color: rgb(228, 228, 165);
+}
+.sobremi p{
+
+    font-size: 25px;
 }
