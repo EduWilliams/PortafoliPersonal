@@ -8,42 +8,19 @@ body{
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
-
-
-}
-.CONTAINERT{
-
-    DISPLAY: FLEX;
-    FLEX-WRAP: WRAP;
-  }
-  
-  .ITEM {
-    WIDTH: 100%;
-    PADDING: 2EM;
-    FONT-SIZE: 2REM;
-  }
-  
-  @MEDIA (MIN-WIDTH: 768PX) {
-    .ITEM {
-      WIDTH: 50%;
-      FONT-SIZE: 1.5REM;
-    }
-  }
-  
-  @MEDIA (MIN-WIDTH: 1024PX) {
-    .ITEM {
-      WIDTH: 33.33%;
-      FONT-SIZE: 1REM;
-    }
-
+    font-size: 16px;
 
 }
+
+
+
+
 .Personal{
-    width: 300px; 
-        height: 300px; 
-        border-radius: 150px;
-        -webkit-border-radius: 150px;
-        -moz-border-radius: 150px;
+    width: 18.75em; 
+        height: 18.75em; 
+        border-radius: 9.37em;
+        -webkit-border-radius: 9.37em;
+        -moz-border-radius: 9.37em;
         text-align: center;
         margin: auto;
         display: block;
@@ -53,9 +30,9 @@ body{
 
     width: 80%; 
         height: 90%; 
-        max-width: 300px;
-        max-height: 400px;
-        border-radius: 15px;
+        max-width:18.75em ;
+        max-height: 25em;
+        border-radius: 0.93em;
         align-items: left;
         
      
@@ -68,8 +45,8 @@ body{
     background-color:rgb(95, 93, 93);
     
     width: 25%; 
-    height: 40px; 
-    border-radius: 15px;
+    height: 2.5em; 
+    border-radius: 0.93em;
     text-align: center;
     margin: auto;
     display: block;
@@ -95,34 +72,34 @@ h1 {
     color: black;
 }
 h2, h3{ 
-    margin: 30px;
+    margin: 1.87em;
     color: brown;
 }
 h5 ,h4{
     color:black;
 }
 p{
-    margin: 20px;
-    font-size: 30px;
+    margin: 1.25rem;
+    font-size: 1.87em;
     font-family: 'Dancing Script', cursive;
 
 }
 .Fuente{
-    margin: 20px;
-    font-size: 24px;
+    margin: 1.25rem;
+    font-size: 1.5em;
     font-family: 'Times New Roman', Times, serif;
 }
 .arena {
      margin-top: 0%;
    
     background-color: rgb(199, 195, 195);
-    border-radius: 10px;
+    border-radius: 0.62em;
     text-align: center;
 }
 .green{
     
 background-color:rgb(231, 226, 226);
-border-radius: 10px;
+border-radius: 0.62em;
 text-align: center;
 
 }
@@ -148,10 +125,10 @@ a:hover{
 }
     
 .menu{
-    width: 1000px;
-    margin: 20px auto;
+    width: 62em;
+    margin: 1.25em auto;
     background: rgb(117, 117, 117);
-    border-radius: 10px;
+    border-radius: 0.62em;
 }
 .menu ul{
 
@@ -166,7 +143,7 @@ a:hover{
 .menuh > li a{
 
     display: block;
-    padding: 15px 20px;
+    padding: 0.93em 1.25em;
     color: beige;
     text-decoration: none;
 }
@@ -191,11 +168,11 @@ background-color: gray;
 
 .iconos{
 
-    height: 50px;
-    width: 50px;
+    height: 3.12em;
+    width: 3.12em;
     position: relative; 
     display:inline-block;
-    padding: 17x;
+    padding: 1.06em;
     margin: auto;
   
 
@@ -215,7 +192,7 @@ background-color: gray;
 
     width: 30%; 
         height: 40%; 
-        border-radius: 15px;
+        border-radius: 0.93em;
         text-align: center;
         margin: auto;
         display: block;
@@ -225,7 +202,7 @@ background-color: gray;
 #efecto{
    
 width: 25%;
-font-size: 20px;
+font-size: 1.25em;
 animation-name: miAnimacion;
     animation-duration: 3s;
     animation-direction: alternate;
@@ -244,5 +221,32 @@ animation-name: miAnimacion;
 }
 .sobremi p{
 
-    font-size: 25px;
+    font-size: 1.56em;
+}
+
+@media(max-width: 1200px) {
+    body{
+        font-size: 14px;
+
+    }
+    
+    
+}
+@media(max-width: 992px) {
+    body{
+        font-size: 13px;
+
+    }
+}
+@media(max-width: 768px) {
+    body{
+        font-size: 12px;
+
+    }
+}
+@media(max-width: 576px) {
+    body{
+        font-size: 11px;
+
+    }
 }
