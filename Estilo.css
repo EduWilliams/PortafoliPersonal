@@ -212,6 +212,10 @@ animation-name: miAnimacion;
     from {color: red;}
     to {color: blue;}
 }
+#telefono{
+
+    font-size: 0.60em;
+}
 
 
 .sobremi{
