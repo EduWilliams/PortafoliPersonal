@@ -246,7 +246,7 @@ animation-name: miAnimacion;
 }
 @media(max-width: 576px) {
     body{
-        font-size: 5px;
+        font-size: 10px;
 
     }
 }
