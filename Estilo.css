@@ -246,7 +246,17 @@ animation-name: miAnimacion;
 }
 @media(max-width: 576px) {
     body{
-        font-size: 10px;
+        font-size: 9px;
+
+    }
+
+
+
+}
+
+@media(max-width: 366px) {
+    body{
+        font-size: 7px;
 
     }
 }
