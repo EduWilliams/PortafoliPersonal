@@ -230,7 +230,7 @@ animation-name: miAnimacion;
 
 @media(max-width: 1200px) {
     body{
-        font-size: 14px;
+        font-size: 0.875em;
 
     }
     
@@ -238,19 +238,19 @@ animation-name: miAnimacion;
 }
 @media(max-width: 992px) {
     body{
-        font-size: 13px;
+        font-size: 0.812em;
 
     }
 }
 @media(max-width: 768px) {
     body{
-        font-size: 12px;
+        font-size: 0.75em;
 
     }
 }
 @media(max-width: 576px) {
     body{
-        font-size: 20px;
+        font-size: 0.5625em;
 
     }
 
@@ -260,7 +260,7 @@ animation-name: miAnimacion;
 
 @media(max-width: 300px) {
     body{
-        font-size: 20px;
+        font-size: 0.4375em;
 
 
     }
