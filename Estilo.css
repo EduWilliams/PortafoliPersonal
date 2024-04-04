@@ -258,7 +258,7 @@ animation-name: miAnimacion;
 
 }
 
-@media(max-width: 366px) {
+@media(max-width: 300px) {
     body{
         font-size: 7px;
 
