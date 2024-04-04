@@ -260,7 +260,7 @@ animation-name: miAnimacion;
 
 @media(max-width: 300px) {
     body{
-        font-size: 2px;
+        font-size: 20px;
 
 
     }
