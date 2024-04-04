@@ -250,7 +250,7 @@ animation-name: miAnimacion;
 }
 @media(max-width: 576px) {
     body{
-        font-size: 9px;
+        font-size: 20px;
 
     }
 
