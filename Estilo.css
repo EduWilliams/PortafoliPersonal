@@ -260,13 +260,8 @@ animation-name: miAnimacion;
 
 @media(max-width: 300px) {
     body{
-        font-size: 9px;
+        font-size: 6px;
 
-
-    }
-    #telefono{
-
-        font-size: 1.0rem;
 
     }
    
